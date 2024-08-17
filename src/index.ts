@@ -8,15 +8,14 @@ import { Order } from './models/Order';
 import { User } from './models/User';
 import { RestaurantOwner } from './models/RestaurantOwner';
 import { DeliveryMetaData } from './models/DeliveryMetaData';
-import { FoodManager } from './managers/FoodManager'; // Import FoodManager
+import { FoodManager } from './managers/FoodManager';
 
-// Create instances of necessary classes
 const userManager = new UserManager();
 const orderManager = new OrderManager();
 const pushNotificationSender = new PushNotificationSender();
 const deliveryStrategy = new LocBasedDeliveryChargeCalculationStrategy(); // Now implements IDeliveryPartnerMatchingStrategy
 const deliveryManager = new DeliveryPartnerManager(deliveryStrategy);
-const foodManager = new FoodManager(); // Create instance of FoodManager
+const foodManager = new FoodManager();
 
 // Sample data
 const user = new User('1', 'Alice', 'alice@example.com');
@@ -25,24 +24,22 @@ const order = new Order('1', user.id, restaurant.id);
 const owner = new RestaurantOwner('1', 'Bob');
 const deliveryMetaData = new DeliveryMetaData('1', new Date());
 
-// Add user
 userManager.addUser(user);
-foodManager.registerUser(user); // Register user in FoodManager
+foodManager.registerUser(user);
 
-// Create order
 orderManager.createOrder(order);
-foodManager.placeOrder(order); // Place order in FoodManager
+foodManager.placeOrder(order);
 
-// Add restaurant
-foodManager.addRestaurant(restaurant); // Add restaurant in FoodManager
+foodManager.addRestaurant(restaurant);
 
-// Assign delivery partner
+const distance = 5;
+const deliveryCharge = deliveryStrategy.calculateCharge(distance);
+console.log(`Delivery charge for ${distance} km: ${deliveryCharge}`);
+
 const deliveryPartner = deliveryManager.assignPartner(order.id);
 
-// Send push notification
-pushNotificationSender.sendNotification(user.id, `Your order from ${restaurant.name} is being processed.`);
+pushNotificationSender.sendNotification(user.id, `Your order from ${restaurant.name} is being processed. Delivery charge: ${deliveryCharge}`);
 
-// Output details
 console.log(user.getUserDetails());
 console.log(restaurant.getRestaurantDetails());
 console.log(order.getOrderDetails());
@@ -50,6 +47,5 @@ console.log(owner.getOwnerDetails());
 console.log(deliveryMetaData.getDeliveryDetails());
 console.log(`Assigned Delivery Partner: ${deliveryPartner}`);
 
-// Additional outputs using FoodManager
 console.log('All Restaurants:', foodManager.listAllRestaurants());
 console.log(`Orders by ${user.name}:`, foodManager.getOrdersByUserId(user.id));
