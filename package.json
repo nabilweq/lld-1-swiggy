@@ -1,0 +1,19 @@
+{
+  "name": "swiggy-lld",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nabilweq/lld-1-swiggy.git"
+  },
+  "author": "nabeel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nabilweq/lld-1-swiggy/issues"
+  },
+  "homepage": "https://github.com/nabilweq/lld-1-swiggy#readme"
+}
