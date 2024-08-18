@@ -34,7 +34,7 @@ foodManager.addRestaurant(restaurant);
 
 const distance = 5;
 const deliveryCharge = deliveryStrategy.calculateCharge(distance);
-console.log(`Delivery charge for ${distance} km: ${deliveryCharge}`);
+console.log(`Delivery charge for your order ${order.id} in ${distance} km: ${deliveryCharge}`);
 
 const deliveryPartner = deliveryManager.assignPartner(order.id);
 
