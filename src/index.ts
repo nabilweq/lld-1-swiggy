@@ -45,7 +45,7 @@ console.log(restaurant.getRestaurantDetails());
 console.log(order.getOrderDetails());
 console.log(owner.getOwnerDetails());
 console.log(deliveryMetaData.getDeliveryDetails());
-console.log(`Assigned Delivery Partner: ${deliveryPartner}`);
+console.log(`Allocated Delivery Partner: ${deliveryPartner}`);
 
 console.log('All Restaurants:', foodManager.listAllRestaurants());
 console.log(`Orders by ${user.name}:`, foodManager.getOrdersByUserId(user.id));
