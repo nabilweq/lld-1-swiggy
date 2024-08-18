@@ -47,5 +47,5 @@ console.log(owner.getOwnerDetails());
 console.log(deliveryMetaData.getDeliveryDetails());
 console.log(`Allocated Delivery Partner: ${deliveryPartner}`);
 
-console.log('All Restaurants:', foodManager.listAllRestaurants());
+console.log('Available Restaurants right now:', foodManager.listAllRestaurants());
 console.log(`Orders by ${user.name}:`, foodManager.getOrdersByUserId(user.id));
