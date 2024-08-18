@@ -13,7 +13,7 @@ import { FoodManager } from './managers/FoodManager';
 const userManager = new UserManager();
 const orderManager = new OrderManager();
 const pushNotificationSender = new PushNotificationSender();
-const deliveryStrategy = new LocBasedDeliveryChargeCalculationStrategy(); // Now implements location based delivery strategy
+const deliveryStrategy = new LocBasedDeliveryChargeCalculationStrategy(); // For now iam implementing location based delivery strategy
 const deliveryManager = new DeliveryPartnerManager(deliveryStrategy);
 const foodManager = new FoodManager();
 
