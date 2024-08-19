@@ -6,22 +6,19 @@ import { UserManager } from './managers/UserManager';
 import { Restaurant } from './models/Restaurant';
 import { Order } from './models/Order';
 import { User } from './models/User';
-import { RestaurantOwner } from './models/RestaurantOwner';
 import { DeliveryMetaData } from './models/DeliveryMetaData';
 import { FoodManager } from './managers/FoodManager';
 
 const userManager = new UserManager();
 const orderManager = new OrderManager();
 const pushNotificationSender = new PushNotificationSender();
-const deliveryStrategy = new LocBasedDeliveryChargeCalculationStrategy(); // For now iam implementing location based delivery strategy
+const deliveryStrategy = new LocBasedDeliveryChargeCalculationStrategy();
 const deliveryManager = new DeliveryPartnerManager(deliveryStrategy);
-const foodManager = new FoodManager();
+const foodManager = new FoodManager(orderManager, userManager, deliveryManager);
 
-// Sample data
 const user = new User('1', 'Alice', 'alice@example.com');
 const restaurant = new Restaurant('1', 'Food Palace', '123 Street');
 const order = new Order('1', user.id, restaurant.id);
-const owner = new RestaurantOwner('1', 'Bob');
 const deliveryMetaData = new DeliveryMetaData('1', new Date());
 
 userManager.addUser(user);
@@ -34,7 +31,7 @@ foodManager.addRestaurant(restaurant);
 
 const distance = 5;
 const deliveryCharge = deliveryStrategy.calculateCharge(distance);
-console.log(`Delivery charge for your order ${order.id} in ${distance} km: ${deliveryCharge}`);
+console.log(`Delivery charge for ${distance} km: ${deliveryCharge}`);
 
 const deliveryPartner = deliveryManager.assignPartner(order.id);
 
@@ -43,9 +40,8 @@ pushNotificationSender.sendNotification(user.id, `Your order from ${restaurant.n
 console.log(user.getUserDetails());
 console.log(restaurant.getRestaurantDetails());
 console.log(order.getOrderDetails());
-console.log(owner.getOwnerDetails());
 console.log(deliveryMetaData.getDeliveryDetails());
-console.log(`Allocated Delivery Partner: ${deliveryPartner}`);
+console.log(`Assigned Delivery Partner: ${deliveryPartner}`);
 
-console.log('Available Restaurants right now:', foodManager.listAllRestaurants());
-console.log(`Orders by ${user.name}:`, foodManager.getOrdersByUserId(user.id));
+console.log('Tracking All Orders:');
+console.log(foodManager.trackAllOrders());

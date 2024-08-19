@@ -10,4 +10,8 @@ export class OrderManager {
     getOrderById(orderId: string): Order | undefined {
         return this.orders.find(order => order.id === orderId);
     }
+
+    getAllOrders(): Order[] {
+        return this.orders;
+    }
 }

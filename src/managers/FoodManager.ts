@@ -1,11 +1,33 @@
+import { UserManager } from './UserManager';
 import { Restaurant } from '../models/Restaurant';
-import { User } from '../models/User';
 import { Order } from '../models/Order';
+import { User } from '../models/User';
+import { OrderManager } from './OrderManager';
+import { DeliveryPartnerManager } from './DeliveryPartnerManager';
 
 export class FoodManager {
     private restaurants: Restaurant[] = [];
     private orders: Order[] = [];
     private users: User[] = [];
+    private orderManager: OrderManager;
+    private userManager: UserManager;
+    private deliveryPartnerManager: DeliveryPartnerManager;
+
+    constructor(orderManager: OrderManager, userManager: UserManager, deliveryPartnerManager: DeliveryPartnerManager) {
+        this.orderManager = orderManager;
+        this.userManager = userManager;
+        this.deliveryPartnerManager = deliveryPartnerManager;
+    }
+
+    trackAllOrders(): string {
+        const orders = this.orderManager.getAllOrders();
+        return orders.map(order => {
+            const user = this.userManager.getUserById(order.userId);
+            const restaurant = this.getRestaurantById(order.restaurantId);
+            const deliveryPartner = this.deliveryPartnerManager.assignPartner(order.id);
+            return `Order ID: ${order.id} User: ${user ? user.name : 'Unknown User'} Restaurant: ${restaurant ? restaurant.name : 'Unknown Restaurant'} Delivery Partner: ${deliveryPartner ? deliveryPartner : 'No Partner Assigned'}`;
+        }).join('\n');
+    }
 
     addRestaurant(restaurant: Restaurant): void {
         this.restaurants.push(restaurant);
