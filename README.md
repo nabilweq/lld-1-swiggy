@@ -4,7 +4,7 @@ This is my attempt with Typescript for the Swiggy/Zomato LLD Tutorial of [Keerti
 
 
 ## UML Diagram
-<img src="https://github.com/nabilweq/lld-1-swiggy/blob/main/swiggy_lld.png" width=550px height=450px>
+<img src="https://github.com/nabilweq/lld-1-swiggy/blob/main/swiggy_lld.png" width=950px height=2379px>
 
 ## Demo with React App
 
@@ -14,7 +14,7 @@ Repo: https://github.com/nabilweq/lld-demo2
 
 ## Tutorial
 
-Here is the full tutorial: https://www.youtube.com/watch?v=a-F45Jov0Ck
+Here is the full tutorial: https://www.youtube.com/watch?v=XN17WWiUzT4
 
 
 
